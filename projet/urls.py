@@ -24,5 +24,8 @@ urlpatterns = [
     path('blog/', views.blog, name="blog"),
     path('contact/', views.contact, name="contact"),
     path('portfolio/', views.portfolio, name="portfolio"),
-    path('backoffice/', views.backoffice, name="backoffice")
+    path('backoffice/', views.backoffice, name="backoffice"),
+    path('create_portfolio/', views.create_portfolio, name="create_portfolio"),
+    path('create_blog/', views.create_blog, name="create_blog"),
+    path('tableau/', views.tableau, name="tableau")
 ]

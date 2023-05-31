@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from app.models import BlogPost, PortfolioPost
+from app.forms import BlogForm, PortfolioForm
 
 # Create your views here.
 def blog(request):
@@ -13,7 +14,7 @@ def index(request):
     return render(request, 'app/index.html')
 
 def backoffice(request):
-    return render(request, 'app/backoffice.html')
+    return render(request, 'app/backoffice/backoffice.html')
 
 def portfolio(request):
     posts = PortfolioPost.objects.all()[:15]  # pour recup les 15 premiers articles
@@ -38,3 +39,33 @@ def portfolio(request):
         post.image = image
     return render(request, "app/portfolio.html", {"posts": posts})
 
+
+def create_portfolio(request):
+    if request.method == "POST":
+        form = PortfolioForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            return redirect("portfolio")
+    else:
+        form = PortfolioForm()
+    return render(request, "app/backoffice/create_portfolio.html", {"form": form})
+
+def create_blog(request):
+    if request.method == "POST":
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            return redirect("blog")
+    else:
+        form = BlogForm()
+    return render(request, "myApp/backoffice/create_blog.html", {"form": form})
+
+
+def tableau(request):
+    blogPost_list = BlogPost.objects.all()
+    portfolioPost_list = PortfolioPost.objects.all()
+    context = {
+        "blogPost_list": blogPost_list,
+        "portfolioPost_list": portfolioPost_list,
+    }
+    return render(request, "app/backoffice/tableau.html", context)
