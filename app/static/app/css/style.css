@@ -2033,6 +2033,12 @@ a.post-title:hover,
   margin-bottom: 0;
 }
 
+.test{
+  background-color: black !important;
+  border: 1px solid red !important;
+  width: 100%;
+}
+
 .copyright .yellow-text:hover {
   color: #ffd500;
   text-decoration: underline;
