@@ -12,6 +12,9 @@ def contact(request):
 def index(request):
     return render(request, 'app/index.html')
 
+def backoffice(request):
+    return render(request, 'app/backoffice.html')
+
 def portfolio(request):
     posts = PortfolioPost.objects.all()[:15]  # pour recup les 15 premiers articles
     images = [
@@ -34,3 +37,4 @@ def portfolio(request):
     for post, image in zip(posts, images):
         post.image = image
     return render(request, "app/portfolio.html", {"posts": posts})
+
